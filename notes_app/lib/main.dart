@@ -3,11 +3,12 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:notes_app/core/constants/app_strings.dart';
 import 'package:notes_app/core/routing/app_router.dart';
 import 'package:notes_app/core/routing/routes.dart';
+import 'package:notes_app/features/note/data/models/note_model.dart';
 
-void main() async{
+void main() async {
   await Hive.initFlutter();
   await Hive.openBox(AppStrings.notesBox);
-
+  Hive.registerAdapter(NoteModelAdapter());
   runApp(const MyApp());
 }
 
@@ -18,12 +19,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.black,
           elevation: 0,
           scrolledUnderElevation: 0,
-          surfaceTintColor: Colors.transparent,
+          // surfaceTintColor: Colors.transparent,
         ),
         brightness: Brightness.dark,
         fontFamily: 'Poppins',

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:notes_app/core/routing/routes.dart';
 
-import '../../views/edit_note_view.dart';
-import '../../views/note_view.dart';
+import '../../features/note/presentation/screens/edit_note_screen.dart';
+import '../../features/note/presentation/screens/note_screen.dart';
 
 
 

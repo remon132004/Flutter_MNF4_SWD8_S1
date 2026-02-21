@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:notes_app/core/constants/app_colors.dart';
 import 'package:notes_app/core/widgets/add_note_bottom_sheet.dart';
 
-import '../core/widgets/custom_appBar.dart';
-import '../core/widgets/notes_view_body.dart';
+import '../../../../core/widgets/custom_appBar.dart';
+import '../../../../core/widgets/notes_view_body.dart';
 
 
 class HomeScreen extends StatefulWidget {
