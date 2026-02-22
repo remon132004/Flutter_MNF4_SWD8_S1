@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             context: context,
             builder: (context) {
-              return AddNoteBotomSheet();
+              return AddNoteBottomSheet();
             },
           );
         },
