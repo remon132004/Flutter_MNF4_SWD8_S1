@@ -5,12 +5,15 @@ import 'package:notes_app/core/constants/app_strings.dart';
 import 'package:notes_app/core/routing/app_router.dart';
 import 'package:notes_app/core/routing/routes.dart';
 import 'package:notes_app/features/note/data/models/note_model.dart';
+import 'package:notes_app/features/note/data/repo/NotesRepo.dart';
 import 'package:notes_app/features/note/presentation/cubit/add_note_cubit/add_note_cubit.dart';
+
+import 'features/note/presentation/cubit/notes_cubit/notes_cubit.dart';
 
 void main() async {
   await Hive.initFlutter();
-  await Hive.openBox(AppStrings.notesBox);
   Hive.registerAdapter(NoteModelAdapter());
+  await Hive.openBox<NoteModel>(AppStrings.notesBox);
   runApp(const MyApp());
 }
 
@@ -21,7 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AddNoteCubit(),
+      create: (context) => NotesCubit( NotesRepo())..getNotes(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

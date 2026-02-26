@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_app/core/constants/app_strings.dart';
 import 'package:notes_app/core/widgets/custom_text_field.dart';
+import 'package:notes_app/features/note/data/models/note_model.dart';
 import 'package:notes_app/features/note/presentation/cubit/add_note_cubit/add_note_cubit.dart';
+import 'package:notes_app/features/note/presentation/cubit/notes_cubit/notes_cubit.dart';
 
+import '../routing/routes.dart';
 import 'custom_button.dart';
 
 class AddNoteBottomSheet extends StatelessWidget {
@@ -31,12 +34,22 @@ class _AddNoteFormState extends State<AddNoteForm> {
   String? title;
   String? subtitle;
 
-
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AddNoteCubit, AddNoteState>(
+    final cubit = context.read<AddNoteCubit>();
+    return BlocConsumer<AddNoteCubit, AddNoteState>(
+      listener: (context, state) {
+        if (state is AddNoteSuccess) {
+          context.read<NotesCubit>().getNotes();
+          Navigator.pop(context);
+        }
+        if (state is AddNoteFailure) {
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.errM)));
+        }
+      },
       builder: (context, state) {
-        context.read<AddNoteCubit>();
         return Form(
           key: formKey,
           autovalidateMode: autoValidateMode,
@@ -62,6 +75,15 @@ class _AddNoteFormState extends State<AddNoteForm> {
                 onTap: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
+                    cubit.addNote(
+                      NoteModel(
+                        title: title!,
+                        subtitle: subtitle!,
+                        date: DateTime.now(),
+                        color: 0xFF53EDD8,
+                      ),
+                    );
+
                   } else {
                     autoValidateMode = AutovalidateMode.always;
                     setState(() {});
@@ -77,5 +99,3 @@ class _AddNoteFormState extends State<AddNoteForm> {
     );
   }
 }
-
-

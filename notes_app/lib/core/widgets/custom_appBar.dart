@@ -6,12 +6,13 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     required this.title,
     required this.icon,
     this.implyLeading = false,
+    this.onTap,
   });
 
   final String title;
   final IconData icon;
   final bool implyLeading;
-
+  final void Function()? onTap;
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
@@ -29,7 +30,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             borderRadius: BorderRadius.circular(16),
             color: Color(0xff3d3d3d),
           ),
-          child: Icon(size: 28, icon),
+          child: GestureDetector(onTap: onTap, child: Icon(size: 28, icon)),
         ),
       ],
     );

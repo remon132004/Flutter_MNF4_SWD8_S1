@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app/features/note/presentation/cubit/notes_cubit/notes_cubit.dart';
+import 'package:notes_app/core/constants/extensions.dart';
+import '../../features/note/data/models/note_model.dart';
 import '../constants/app_colors.dart';
+import '../constants/extensions.dart';
 
 class NoteItem extends StatelessWidget {
-  const NoteItem({super.key});
+  final NoteModel note;
+  final int index;
+
+  const NoteItem({super.key, required this.index, required this.note});
 
   @override
   Widget build(BuildContext context) {
@@ -19,25 +26,27 @@ class NoteItem extends StatelessWidget {
         children: [
           ListTile(
             title: Text(
-              "Flutter Tips",
+              note.title,
               style: TextStyle(color: AppColors.primaryColor, fontSize: 25),
             ),
             subtitle: Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: Text(
-                "build your career with Remon",
+                note.subtitle,
                 style: TextStyle(color: AppColors.secondaryColor, fontSize: 18),
               ),
             ),
             trailing: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                context.read<NotesCubit>().deleteNote(index);
+              },
               icon: Icon(Icons.delete, color: AppColors.primaryColor, size: 35),
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(right: 20.0),
             child: Text(
-              "May21,2026",
+              note.date.toUiDate(),
               style: TextStyle(fontSize: 16, color: AppColors.secondaryColor),
             ),
           ),
