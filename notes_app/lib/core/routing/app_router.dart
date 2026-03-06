@@ -20,12 +20,11 @@ class AppRouter {
       case AppRoutes.editScreen:
         final args = settings.arguments as Map<String, dynamic>;
         final note = args['note'] as NoteModel;
-        final index = args['index'] as int;
         return MaterialPageRoute(
           builder: (context) {
             return BlocProvider(
               create: (context) => EditNoteCubit(NotesRepo()),
-              child: EditNoteScreen(note: note, index: index),
+              child: EditNoteScreen(note: note,),
             );
           },
         );

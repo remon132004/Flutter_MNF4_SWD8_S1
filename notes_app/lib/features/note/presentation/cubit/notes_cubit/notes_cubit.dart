@@ -18,12 +18,12 @@ class NotesCubit extends Cubit<NotesState> {
     }
   }
 
-  Future<void> deleteNote(int index) async {
-    try {
-      await repo.deleteNote(index);
-      getNotes();
-    } catch (e) {
-      emit(NotesFailure(e.toString()));
-    }
-  }
+  // Future<void> deleteNote(int index) async {
+  //   try {
+  //     await repo.deleteNote(index);
+  //     getNotes();
+  //   } catch (e) {
+  //     emit(NotesFailure(e.toString()));
+  //   }
+  // }
 }

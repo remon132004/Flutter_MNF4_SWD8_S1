@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:notes_app/core/constants/app_colors.dart';
 
 import '../../features/note/data/models/note_model.dart';
 import '../routing/routes.dart';
@@ -20,12 +21,13 @@ class NotesViewBody extends StatelessWidget {
               itemCount: notes.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
-                  child: NoteItem(index: index, note: notes[index]),
+                  child: NoteItem(note: notes[index],),
                   onTap: () {
-                    Navigator.pushNamed(context, AppRoutes.editScreen, arguments: {
-                      'note': notes[index],
-                      'index': index,
-                    },);
+                    Navigator.pushNamed(
+                      context,
+                      AppRoutes.editScreen,
+                      arguments: {'note': notes[index],},
+                    );
                   },
                 );
               },

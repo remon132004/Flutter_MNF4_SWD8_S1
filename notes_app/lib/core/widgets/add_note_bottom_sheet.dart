@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:notes_app/core/constants/app_colors.dart';
 import 'package:notes_app/core/constants/app_strings.dart';
+import 'package:notes_app/core/widgets/add_color_list.dart';
+import 'package:notes_app/core/widgets/color_item.dart';
 import 'package:notes_app/core/widgets/custom_text_field.dart';
 import 'package:notes_app/features/note/data/models/note_model.dart';
 import 'package:notes_app/features/note/presentation/cubit/add_note_cubit/add_note_cubit.dart';
@@ -33,6 +36,7 @@ class _AddNoteFormState extends State<AddNoteForm> {
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   String? title;
   String? subtitle;
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +74,10 @@ class _AddNoteFormState extends State<AddNoteForm> {
                   subtitle = value;
                 },
               ),
-              const SizedBox(height: 50),
+              // SizedBox(height: 10),
+              const SizedBox(height: 30),
+              AddColorList(),
+              SizedBox(height: 30),
               CustomButton(
                 onTap: () {
                   if (formKey.currentState!.validate()) {
@@ -83,7 +90,6 @@ class _AddNoteFormState extends State<AddNoteForm> {
                         color: 0xFF53EDD8,
                       ),
                     );
-
                   } else {
                     autoValidateMode = AutovalidateMode.always;
                     setState(() {});

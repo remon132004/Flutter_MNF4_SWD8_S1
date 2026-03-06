@@ -8,9 +8,7 @@ import '../constants/extensions.dart';
 
 class NoteItem extends StatelessWidget {
   final NoteModel note;
-  final int index;
-
-  const NoteItem({super.key, required this.index, required this.note});
+  const NoteItem({super.key,required this.note});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +16,7 @@ class NoteItem extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       padding: EdgeInsets.only(left: 10, top: 20, bottom: 20),
       decoration: BoxDecoration(
-        color: Colors.yellow,
+        color: Color(note.color),
         borderRadius: BorderRadius.circular(16),
       ),
       child: Column(
@@ -38,7 +36,9 @@ class NoteItem extends StatelessWidget {
             ),
             trailing: IconButton(
               onPressed: () {
-                context.read<NotesCubit>().deleteNote(index);
+                // context.read<NotesCubit>().deleteNote(index);
+                note.delete();
+                context.read<NotesCubit>().getNotes();
               },
               icon: Icon(Icons.delete, color: AppColors.primaryColor, size: 35),
             ),
